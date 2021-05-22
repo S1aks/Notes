@@ -8,18 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import static ru.s1aks.notes.AppData.LINE_TIME_TEXT_SIZE;
-import static ru.s1aks.notes.AppData.LINE_TITLE_TEXT_SIZE;
-import static ru.s1aks.notes.AppData.MAIN_LAYOUT_PADDING;
-import static ru.s1aks.notes.AppData.NOTE_LINE_MARGIN;
-import static ru.s1aks.notes.AppData.NOTE_LINE_PADDING;
-import static ru.s1aks.notes.AppData.notes;
 
 public class NotesListFragment extends Fragment {
 
@@ -45,26 +37,26 @@ public class NotesListFragment extends Fragment {
     }
 
     private void createNotesList() {
-        notes = new ArrayList<>();
-        notes.add(new Note("Title 1", "Content 1",
+        AppData.notes = new ArrayList<>();
+        AppData.notes.add(new Note("Title 1", "Content 1",
                 new GregorianCalendar(2021, 2, 2, 11, 34),
                 1));
-        notes.add(new Note("Title 2", "Content 2",
+        AppData.notes.add(new Note("Title 2", "Content 2",
                 new GregorianCalendar(2021, 3, 2, 14, 6),
                 1));
-        notes.add(new Note("Title 3", "Content 3",
+        AppData.notes.add(new Note("Title 3", "Content 3",
                 new GregorianCalendar(2021, 3, 3, 19, 15),
                 1));
-        notes.add(new Note("Title 4", "Content 4",
+        AppData.notes.add(new Note("Title 4", "Content 4",
                 new GregorianCalendar(2021, 3, 5, 22, 54),
                 1));
-        notes.add(new Note("Title 5", "Content 5",
+        AppData.notes.add(new Note("Title 5", "Content 5",
                 new GregorianCalendar(2021, 4, 8, 23, 38),
                 1));
-        notes.add(new Note("Title 6", "Content 6",
+        AppData.notes.add(new Note("Title 6", "Content 6",
                 new GregorianCalendar(2021, 4, 10, 8, 2),
                 1));
-        notes.add(new Note("Title 7", "Content 7",
+        AppData.notes.add(new Note("Title 7", "Content 7",
                 new GregorianCalendar(2021, 4, 12, 14, 31),
                 1));
     }
@@ -73,35 +65,35 @@ public class NotesListFragment extends Fragment {
     private void initList(View view) {
         LinearLayout linearLayout = (LinearLayout) view;
         view.setPadding(
-                MAIN_LAYOUT_PADDING,
+                AppData.MAIN_LAYOUT_PADDING,
                 0,
-                MAIN_LAYOUT_PADDING,
+                AppData.MAIN_LAYOUT_PADDING,
                 0);
-        for (int i = 0; i < notes.size(); i++) {
+        for (int i = 0; i < AppData.notes.size(); i++) {
             LinearLayout noteLineLayout = new LinearLayout(getContext());
             noteLineLayout.setOrientation(LinearLayout.VERTICAL);
             noteLineLayout.setBackgroundColor(R.color.design_default_color_on_primary);
             noteLineLayout.setPadding(
-                    NOTE_LINE_PADDING * 2,
-                    NOTE_LINE_PADDING,
-                    NOTE_LINE_PADDING,
-                    NOTE_LINE_PADDING);
+                    AppData.NOTE_LINE_PADDING * 2,
+                    AppData.NOTE_LINE_PADDING,
+                    AppData.NOTE_LINE_PADDING,
+                    AppData.NOTE_LINE_PADDING);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(
-                    NOTE_LINE_MARGIN,
-                    NOTE_LINE_MARGIN,
-                    NOTE_LINE_MARGIN,
+                    AppData.NOTE_LINE_MARGIN,
+                    AppData.NOTE_LINE_MARGIN,
+                    AppData.NOTE_LINE_MARGIN,
                     0);
             TextView titleTextView = new TextView(getContext());
-            titleTextView.setText(notes.get(i).getTitle());
-            titleTextView.setTextSize(LINE_TITLE_TEXT_SIZE);
+            titleTextView.setText(AppData.notes.get(i).getTitle());
+            titleTextView.setTextSize(AppData.LINE_TITLE_TEXT_SIZE);
             noteLineLayout.addView(titleTextView);
             TextView timeTextView = new TextView(getContext());
             timeTextView.setGravity(Gravity.END);
-            timeTextView.setText(notes.get(i).getStringCreateTime());
-            timeTextView.setTextSize(LINE_TIME_TEXT_SIZE);
+            timeTextView.setText(AppData.notes.get(i).getStringCreateTime());
+            timeTextView.setTextSize(AppData.LINE_TIME_TEXT_SIZE);
             noteLineLayout.addView(timeTextView);
             final int fi = i;
             noteLineLayout.setOnClickListener(v -> changeFragment(fi));
@@ -114,7 +106,6 @@ public class NotesListFragment extends Fragment {
         FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) getActivity();
         assert fragmentChangeListener != null;
         fragmentChangeListener.replaceFragment(NoteContentFragment.newInstance(index));
-
     }
 
 }

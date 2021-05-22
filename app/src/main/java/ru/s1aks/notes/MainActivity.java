@@ -47,4 +47,9 @@ public class MainActivity extends AppCompatActivity implements FragmentChangeLis
         }
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void closeFragment() {
+        getSupportFragmentManager().popBackStack();
+    }
 }

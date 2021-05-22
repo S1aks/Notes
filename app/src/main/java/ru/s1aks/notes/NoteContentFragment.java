@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -72,8 +73,18 @@ public class NoteContentFragment extends Fragment {
                 AppData.NOTE_CONTENT_PADDING,
                 AppData.NOTE_CONTENT_PADDING
         );
-        createTimeTextView.setText("Создано в " + AppData.notes.get(index).getStringCreateTime());
+        createTimeTextView.setText("Created in " + AppData.notes.get(index).getStringCreateTime());
         createTimeTextView.setTextSize(AppData.LINE_TIME_TEXT_SIZE);
         noteContentLayout.addView(createTimeTextView);
+        Button buttonDateEdit = new Button(getContext());
+        buttonDateEdit.setText("Edit date");
+        buttonDateEdit.setTextSize(AppData.LINE_TIME_TEXT_SIZE);
+        buttonDateEdit.setOnClickListener(v -> {
+            FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) getActivity();
+            assert fragmentChangeListener != null;
+            fragmentChangeListener.replaceFragment(DatePickerFragment.newInstance(index));
+        });
+        noteContentLayout.addView(buttonDateEdit);
+
     }
 }
