@@ -1,5 +1,8 @@
 package ru.s1aks.notes;
 
+import android.annotation.SuppressLint;
+
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class Note {
@@ -48,6 +51,12 @@ public class Note {
 
     public GregorianCalendar getCreateTime() {
         return createTime;
+    }
+
+    public String getStringCreateTime() {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat fmt = new SimpleDateFormat("hh:mm  dd.MMMM.yyyy");
+        fmt.setCalendar(createTime);
+        return fmt.format(createTime.getTime());
     }
 
     public Note setCreateTime(GregorianCalendar createTime) {
