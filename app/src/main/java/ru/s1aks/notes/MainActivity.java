@@ -2,16 +2,16 @@ package ru.s1aks.notes;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity implements FragmentChangeListener {
 
-    boolean isLandscape;
-    NotesListFragment notesListFragment;
-    NoteContentFragment noteContentFragment;
+    private static final String KEY_INDEX = "index";
+    private int index;
+    private boolean isLandscape;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,20 +19,43 @@ public class MainActivity extends AppCompatActivity implements FragmentChangeLis
         setContentView(R.layout.activity_main);
         isLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
-        notesListFragment = NotesListFragment.newInstance();
+        NotesListFragment notesListFragment = NotesListFragment.newInstance();
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.mainContainer, notesListFragment)
                     .commit();
             if (isLandscape) {
-                noteContentFragment = NoteContentFragment.newInstance(0);
-                        getSupportFragmentManager()
+                NoteContentFragment noteContentFragment = NoteContentFragment.newInstance(index);
+                getSupportFragmentManager()
                         .beginTransaction()
                         .add(R.id.contentContainer, noteContentFragment)
                         .commit();
             }
         }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        index = savedInstanceState.getInt(KEY_INDEX);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainContainer, NotesListFragment.newInstance())
+                .commit();
+        if (isLandscape) {
+            NoteContentFragment noteContentFragment = NoteContentFragment.newInstance(index);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contentContainer, noteContentFragment)
+                    .commit();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_INDEX, index);
     }
 
     @Override
@@ -49,7 +72,19 @@ public class MainActivity extends AppCompatActivity implements FragmentChangeLis
     }
 
     @Override
-    public void closeFragment() {
-        getSupportFragmentManager().popBackStack();
+    public void closeFragmentAndBackTo(int indexPopFragment) {
+        if (isLandscape) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contentContainer, NoteContentFragment.newInstance(indexPopFragment))
+                    .commit();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
+
+    @Override
+    public void changeIndex(int index) {
+        this.index = index;
     }
 }

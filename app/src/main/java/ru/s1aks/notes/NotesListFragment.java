@@ -105,6 +105,7 @@ public class NotesListFragment extends Fragment {
     private void changeFragment(int index) {
         FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) getActivity();
         assert fragmentChangeListener != null;
+        fragmentChangeListener.changeIndex(index);
         fragmentChangeListener.replaceFragment(NoteContentFragment.newInstance(index));
     }
 

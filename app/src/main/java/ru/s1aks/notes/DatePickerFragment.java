@@ -14,8 +14,9 @@ public class DatePickerFragment extends Fragment {
 
     private static final String ARG_INDEX = "index";
     private int index;
-    DatePicker datePicker;
-    GregorianCalendar timeCreate;
+
+    private DatePicker datePicker;
+    private GregorianCalendar timeCreate;
 
     public DatePickerFragment() {
     }
@@ -54,7 +55,7 @@ public class DatePickerFragment extends Fragment {
             AppData.notes.get(index).setCreateTime(timeCreate);
             FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) getActivity();
             assert fragmentChangeListener != null;
-            fragmentChangeListener.closeFragment();
+            fragmentChangeListener.closeFragmentAndBackTo(index);
         });
         return view;
     }
