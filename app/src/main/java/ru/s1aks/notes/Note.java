@@ -3,18 +3,18 @@ package ru.s1aks.notes;
 import android.annotation.SuppressLint;
 
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 public class Note {
-    private int id;
+    private final int id;
     private String title;
     private String content;
-    private GregorianCalendar createTime;
+    private Date createTime;
     private int importance;
 
     private static int freeId;
 
-    public Note(String title, String content, GregorianCalendar createTime, int importance) {
+    public Note(String title, String content, Date createTime, int importance) {
         this.id = freeId++;
         this.title = title;
         this.content = content;
@@ -24,11 +24,6 @@ public class Note {
 
     public int getId() {
         return id;
-    }
-
-    public Note setId(int id) {
-        this.id = id;
-        return this;
     }
 
     public String getTitle() {
@@ -49,17 +44,16 @@ public class Note {
         return this;
     }
 
-    public GregorianCalendar getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
     public String getStringCreateTime() {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat fmt = new SimpleDateFormat("hh:mm  dd.MMMM.yyyy");
-        fmt.setCalendar(createTime);
-        return fmt.format(createTime.getTime());
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm  dd MMMM yyyy");
+        return dateFormat.format(createTime);
     }
 
-    public Note setCreateTime(GregorianCalendar createTime) {
+    public Note setCreateTime(Date createTime) {
         this.createTime = createTime;
         return this;
     }
@@ -75,9 +69,5 @@ public class Note {
 
     public static int getFreeId() {
         return freeId;
-    }
-
-    public static void setFreeId(int freeId) {
-        Note.freeId = freeId;
     }
 }
