@@ -47,38 +47,39 @@ public class NoteContentFragment extends Fragment {
     private void initView(View view) {
         LinearLayout noteContentLayout = (LinearLayout) view;
         TextView titleTextView = new TextView(getContext());
+        int noteContentPadding = getResources().getInteger(R.integer.noteContentPadding);
         titleTextView.setPadding(
-                AppData.NOTE_CONTENT_PADDING,
-                AppData.NOTE_CONTENT_PADDING,
-                AppData.NOTE_CONTENT_PADDING,
-                AppData.NOTE_CONTENT_PADDING
+                noteContentPadding,
+                noteContentPadding,
+                noteContentPadding,
+                noteContentPadding
         );
         titleTextView.setText(AppData.notes.get(index).getTitle());
-        titleTextView.setTextSize(AppData.LINE_TITLE_TEXT_SIZE);
+        titleTextView.setTextSize(getResources().getInteger(R.integer.lineTitleTextSize));
         noteContentLayout.addView(titleTextView);
         TextView contentTextView = new TextView(getContext());
         contentTextView.setPadding(
-                AppData.NOTE_CONTENT_PADDING,
-                AppData.NOTE_CONTENT_PADDING,
-                AppData.NOTE_CONTENT_PADDING,
-                AppData.NOTE_CONTENT_PADDING
+                noteContentPadding,
+                noteContentPadding,
+                noteContentPadding,
+                noteContentPadding
         );
         contentTextView.setText(AppData.notes.get(index).getContent());
-        contentTextView.setTextSize(AppData.CONTENT_TEXT_SIZE);
+        contentTextView.setTextSize(getResources().getInteger(R.integer.contentTextSize));
         noteContentLayout.addView(contentTextView);
         TextView createTimeTextView = new TextView(getContext());
         createTimeTextView.setPadding(
-                AppData.NOTE_CONTENT_PADDING,
-                AppData.NOTE_CONTENT_PADDING,
-                AppData.NOTE_CONTENT_PADDING,
-                AppData.NOTE_CONTENT_PADDING
+                noteContentPadding,
+                noteContentPadding,
+                noteContentPadding,
+                noteContentPadding
         );
         createTimeTextView.setText("Created in " + AppData.notes.get(index).getStringCreateTime());
-        createTimeTextView.setTextSize(AppData.LINE_TIME_TEXT_SIZE);
+        createTimeTextView.setTextSize(getResources().getInteger(R.integer.lineTimeTextSize));
         noteContentLayout.addView(createTimeTextView);
         Button buttonDateEdit = new Button(getContext());
         buttonDateEdit.setText("Edit date");
-        buttonDateEdit.setTextSize(AppData.LINE_TIME_TEXT_SIZE);
+        buttonDateEdit.setTextSize(getResources().getInteger(R.integer.lineTimeTextSize));
         buttonDateEdit.setOnClickListener(v -> {
             FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) getActivity();
             assert fragmentChangeListener != null;
