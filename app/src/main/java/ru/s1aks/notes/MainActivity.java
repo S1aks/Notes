@@ -22,6 +22,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.text.ParseException;
 
+import ru.s1aks.notes.data.FragmentChangeListener;
+import ru.s1aks.notes.data.NoteSource;
+import ru.s1aks.notes.data.NoteSourceImpl;
+import ru.s1aks.notes.ui.NoteContentFragment;
+import ru.s1aks.notes.ui.NotesListFragment;
+import ru.s1aks.notes.ui.Settings;
+import ru.s1aks.notes.ui.SettingsFragment;
+
 public class MainActivity extends AppCompatActivity implements FragmentChangeListener {
 
     private static final String KEY_INDEX = "index";

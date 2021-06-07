@@ -1,4 +1,4 @@
-package ru.s1aks.notes;
+package ru.s1aks.notes.ui;
 
 public class Settings {
     public static final String SHARED_PREFERENCE_NAME = "ApplicationSettings";
