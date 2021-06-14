@@ -1,4 +1,4 @@
-    package ru.s1aks.notes;
+    package ru.s1aks.notes.ui;
 
     import android.os.Bundle;
     import android.view.LayoutInflater;
@@ -10,7 +10,11 @@
 
     import java.util.Calendar;
 
-public class DatePickerFragment extends Fragment {
+    import ru.s1aks.notes.data.FragmentChangeListener;
+    import ru.s1aks.notes.MainActivity;
+    import ru.s1aks.notes.R;
+
+    public class DatePickerFragment extends Fragment {
 
     private static final String ARG_INDEX = "index";
     private int index;

@@ -1,4 +1,4 @@
-package ru.s1aks.notes;
+package ru.s1aks.notes.data;
 
 import androidx.fragment.app.Fragment;
 
